@@ -14,6 +14,13 @@ class Cats {
     public $size;
     private $bark;
     
+    
+    public function __construct(string $color, int $size, string $bark) {
+        $this->setColor($color)
+        ->setBark($sound)
+        ->setSize($size);
+    }
+    
     /**
      * @return mixed
      */
@@ -45,6 +52,7 @@ class Cats {
     {
         if (!in_array(self::SOUNDS, $bark)){
             $this->bark = $bark;
+            return $this;
         }
     }
 
@@ -55,6 +63,7 @@ class Cats {
     {
         if (in_array(self::ALLOWED_COLORS, $color)){
             $this->color = $color;
+            return $this;
         }
     }
 
@@ -64,7 +73,8 @@ class Cats {
     private function setSize($size)
     {
         if (size < self::MAX_SIZE){
-            $this->size = $size;        
+            $this->size = $size;
+            return $this;
         }
     }
 
