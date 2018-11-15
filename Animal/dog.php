@@ -6,9 +6,13 @@ namespace Animal;
  */
 class Cats {
     
-    private $bark;
+    public const ALLOWED_COLORS = ['grey', 'black', 'white'];
+    public const SOUNDS = ['sound1', 'sound2'];
+    private const MAX_SIZE = 30;
+    
     public $color;
     public $size;
+    private $bark;
     
     /**
      * @return mixed
@@ -39,27 +43,35 @@ class Cats {
      */
     public function setBark($bark)
     {
-        $this->bark = $bark;
+        if (!in_array(self::SOUNDS, $bark)){
+            $this->bark = $bark;
+        }
     }
 
     /**
      * @param mixed $color
      */
-    public function setColor($color)
+    private function setColor($color)
     {
-        $this->color = $color;
+        if (in_array(self::ALLOWED_COLORS, $color)){
+            $this->color = $color;
+        }
     }
 
     /**
      * @param mixed $size
      */
-    public function setSize($size)
+    private function setSize($size)
     {
-        $this->size = $size;
+        if (size < self::MAX_SIZE){
+            $this->size = $size;        
+        }
     }
 
+    
+    
     public function walkAnimal(int $size) {
-        if ($size > 30) {
+        if ($size > self::MAX_SIZE) {
             throw new RuntimeException('The size is too big to be able to walk him...');
         }
     }
@@ -71,7 +83,7 @@ class Cats {
     }
     
     public function clean(string $color) {
-        if ($color == 'white') {
+        if (!in_array(self::ALLOWED_COLORS, $color)) {
             return 'Darling, going for a walk so prepare towels please!!!';             
         }
     }
